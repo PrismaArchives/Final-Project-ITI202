@@ -1,7 +1,7 @@
 import requests
 import json
 
-###Final Project for IT OOP class searches NYT API for mentions of AI to do a frequency analysis
+#Final Project for IT OOP class searches NYT API for mentions of AI to do a frequency analysis
 
 url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 
@@ -21,6 +21,10 @@ params = {
 def set_params(fq, q):
     params['fq'] = fq
     params['q'] = q
+
+#the list of terms we'll be searching for
+search_term_list = ["A.I.","AI","Artificial Intelligence"]
+years_list = [2023, 2013, 2000]
 
 def api_key_selection():
     global api_use_int
@@ -54,10 +58,6 @@ def get_hits_error_wrapper():
         hits = get_hits_error_wrapper()
     return hits
 
-#the list of terms we'll be searching for
-search_term_list = ["A.I.","AI","Artificial Intelligence"]
-years_list = [2023, 2013]
-
 #searches for a variety of terms within the year specified and creates a nested dictionary of the year being searched, the terms, and the hits per term that is then converted into json
 def search_terms_in_year(years, term_list: list):
     results_dict = {}
@@ -76,6 +76,7 @@ def search_terms_in_year(years, term_list: list):
 def compare_years(first_year, second_year, term_list):
     #initialize new dictionary and sets it with a terms key for inputting the various term dictionaries used later
     terms_dict = {}
+    terms_dict["compared years"] = f"{first_year} & {second_year}"
     terms_dict["terms"] = {}
     #opens the file to read it for later data retrieval
     with open('hits_data.json') as openfile:
@@ -107,7 +108,7 @@ def compare_years(first_year, second_year, term_list):
     with open('hits_data.json', 'w') as file:
         json.dump(hits_json_data, file, indent=4)
     
-    print(hits_json_data)
+    print(hits_json_data['terms'])
 
 #does the searches we need for the years wanted and then compares them
 search_terms_in_year(years_list,search_term_list)
