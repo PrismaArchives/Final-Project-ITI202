@@ -2,7 +2,7 @@ import requests
 import json
 
 #Final Project for IT OOP class searches NYT API for mentions of AI to do a frequency analysis
-
+# Code done by Tobiah Powell, docstrings done by Jon Tam
 url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 
 #NYT API has some really strict rate limiting of only 5 queries in a minute so we had a list for switching to finish grabbing data if one of our keys has reached max calls
