@@ -22,9 +22,9 @@ def set_params(fq, q):
     params['fq'] = fq
     params['q'] = q
 
-#the list of terms we'll be searching for
+#the list of terms and years we'll be searching for
 search_term_list = ["A.I.","AI","Artificial Intelligence"]
-years_list = [2023, 2013, 2000]
+years_list = [2023, 2013]
 
 def api_key_selection():
     global api_use_int
