@@ -19,6 +19,11 @@ params = {
 
 #fq and q are the strings used for querying the API
 def set_params(fq, q):
+    """
+    Sets the query parameters used for API requests
+    fq: A string for filter query parameter for the API request
+    q: A string for query parameter for the API request
+    """
     params['fq'] = fq
     params['q'] = q
 
@@ -27,6 +32,9 @@ search_term_list = ["A.I.","AI","Artificial Intelligence"]
 years_list = [2023, 2013]
 
 def api_key_selection():
+    """
+    Select the appropriate API key for use based on the number of queries made
+    """
     global api_use_int
     selected_key = api_use_int // 5
     # this if/else will iterate through keys whenever a key reaches its request limit and loop back around after reaching the end of the list
@@ -38,6 +46,10 @@ def api_key_selection():
 
 #uses current parameters in order to get how many articles with that term AKA "hits"
 def get_hits():
+    """
+    Makes an API request to get the number of "hits" for the current parameters
+    Returns an integer for the number of hits from the API request
+    """
     api_key_selection()
     response = requests.get(url, params)
     content = response.json()
@@ -46,6 +58,10 @@ def get_hits():
 #error wrapper for the get_hits() function. If there would be a KeyError, instead tries the next API_KEY
 def get_hits_error_wrapper():
     #depending on the amount of calls, keys will reach maximum requests. If that occurs the try except will catch it and move to the first attempt of the next key
+    """
+    Catch a key error if it occurs when making an API request for the number of hits
+    Returns an integer representing the number of hits obtained from the API request
+    """
     try:
         hits = get_hits()
     except KeyError:
@@ -60,6 +76,11 @@ def get_hits_error_wrapper():
 
 #searches for a variety of terms within the year specified and creates a nested dictionary of the year being searched, the terms, and the hits per term that is then converted into json
 def search_terms_in_year(years, term_list: list):
+    """
+    Search for terms in the year given and makes a dictionary of the year, terms, and hits
+    years: A list of integers representing the years to search for
+    term_list: A list of strings representing the terms to search for
+    """
     results_dict = {}
     results_dict["years"] = {}
     for year in years:
@@ -75,6 +96,13 @@ def search_terms_in_year(years, term_list: list):
 #will take two years from the hits_data.json file and compare the amount of hits they have.
 def compare_years(first_year, second_year, term_list):
     #initialize new dictionary and sets it with a terms key for inputting the various term dictionaries used later
+    """
+    Compares the number of hits for a list of terms between two years.
+    first_year: int
+    second_year: int
+    term_list: list of str
+    Returns a dictionary containing the compared years, terms, and hits for each term in each year.
+    """
     terms_dict = {}
     terms_dict["compared years"] = f"{first_year} & {second_year}"
     terms_dict["terms"] = {}
