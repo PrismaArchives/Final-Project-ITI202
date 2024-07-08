@@ -8,7 +8,7 @@ url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 #NYT API has some really strict rate limiting of only 5 queries in a minute so we had a list for switching to finish grabbing data if one of our keys has reached max calls
 #api_use_int keeps track of the number of queries made in order to change to a new key
 api_use_int = 0
-API_KEY_LIST = ['9cpGzQ5yf1pGrPZJwA9WYuFd6ZdLzJhA', 'vKDJnQie2GRZ8OlmOonLMhFG7VtrlkEO', 'NYkgk20A5TPWA49C4YsGk7p299pyXfig', '91GviwAkdi4zPAVaL8Uvk3bAyVGsiO9E', 'yCdlAURngorAMNwxrA3X2exb6bhm5Qs8']
+API_KEY_LIST = [] #5 keys were placed in here for the project
 
 #sets starting parameters
 params = { 
